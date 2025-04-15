@@ -2,7 +2,10 @@
 
 ## 🔗 Syllabus
 
-- [Dependency inversion vs dependency injection](#)
+- [Dependency inversion vs dependency injection](#dependency-inversion-vs-dependency-injection)
+- [Polymorphism vs Inheritance](#polymorphism-vs-inheritance)
+- [Value object vs Entites](#value-object-vs-entites)
+- [Subdomains](#subdomains)
 
 ## Dependency inversion vs dependency injection
 

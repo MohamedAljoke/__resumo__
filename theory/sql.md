@@ -2,9 +2,14 @@
 
 ## 🔗 Syllabus
 
-- [SQL Delete vs Truncate vs DROP Table]()
-
-
+- [SQL Delete vs Truncate vs DROP Table](#sql-delete-vs-truncate-vs-drop-table)
+- [SQL primary key and Composit Primary key](#sql-primary-key-and-composit-primary-key)
+- [SQL serial vs identity vs sequence vs UUID](#sql-serial-vs-identity-vs-sequence-vs-uuid)
+- [SQL database INDEXES what are they](#sql-database-indexes-what-are-they)
+- [SQL inner JOIN, LEFT JOIN, Right JOIN, FULL JOIN](#sql-inner-join-left-join-right-join-full-join)
+- [What are SQL Common Table Expressions](#what-are-sql-common-table-expressions)
+- [What is soft delete](#what-is-soft-delete)
+- [What are SQL views](#what-are-sql-views)
 
 ## SQL Delete vs Truncate vs DROP Table
 ```sql

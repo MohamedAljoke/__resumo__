@@ -2,7 +2,13 @@
 
 ## 🔗 Syllabus
 
-- [What is sourceMap in typescript options](#)
+- [What is sourceMap in typescript options](#what-is-sourcemap-in-typescript-options)
+- [Ecmascript vs javascript](#ecmascript-vs-javascript)
+- [What does typescript add that is not in javascript](#what-does-typescript-add-that-is-not-in-javascript)
+- [Arrow function vs normal function](#arrow-function-vs-normal-function)
+- [Closures](#closures)
+- [Generators](#generators)
+- [Abstract Class vs Interface](#abstract-class-vs-interface)
 
 ## External links
 - [Closures - Lydia Hallie](https://youtu.be/6Ixyltr8_R0?si=YyHWy_TFFGWXqkpn)
