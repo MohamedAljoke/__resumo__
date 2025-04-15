@@ -2,12 +2,7 @@
 
 ## 🔗 Syllabus
 
-- [Core JavaScript Concepts](#core-javascript-concepts)
-- [ES6+ Features](#es6-features)
-- [Asynchronous JavaScript](#asynchronous-javascript)
-- [TypeScript](#typescript)
-- [Design Patterns](#design-patterns)
-- [Best Practices](#best-practices)
+- [What is sourceMap in typescript options](#)
 
 ## External links
 - [Closures - Lydia Hallie](https://youtu.be/6Ixyltr8_R0?si=YyHWy_TFFGWXqkpn)
