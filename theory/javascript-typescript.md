@@ -1,4 +1,15 @@
 # JavaScript / TypeScript
+
+## 🔗 Syllabus
+
+- [Core JavaScript Concepts](#core-javascript-concepts)
+- [ES6+ Features](#es6-features)
+- [Asynchronous JavaScript](#asynchronous-javascript)
+- [TypeScript](#typescript)
+- [Design Patterns](#design-patterns)
+- [Best Practices](#best-practices)
+
+## External links
 - [Closures - Lydia Hallie](https://youtu.be/6Ixyltr8_R0?si=YyHWy_TFFGWXqkpn)
 - [Event loop - Boot dev](https://youtu.be/WNrHrwm1wkU?si=ozwVbhNY3UXRrWLo)
 

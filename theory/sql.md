@@ -1,5 +1,11 @@
 # SQL
 
+## 🔗 Syllabus
+
+- [SQL Delete vs Truncate vs DROP Table]()
+
+
+
 ## SQL Delete vs Truncate vs DROP Table
 ```sql
 TRUNCATE TABLE users;

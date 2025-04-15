@@ -1,4 +1,9 @@
 # OOP, SOLID, DDD, Clean Code
+
+## 🔗 Syllabus
+
+- [Dependency inversion vs dependency injection](#)
+
 ## Dependency inversion vs dependency injection
 
 #### 5 years old explanation
