@@ -1,0 +1,98 @@
+# Work Experiences & Problem Solving
+
+This document tracks significant issues, bugs, and problems encountered at work that demonstrate problem-solving skills and technical expertise. Use these for future interviews and reference.
+
+---
+
+## Browser Extension Conflict Bug
+
+**Problem:** Single user experiencing issues while all others worked fine.
+
+**Investigation:** After thorough investigation, discovered the issue was caused by a browser extension interfering with our styling package.
+
+**Resolution:** Identified the specific extension and its interaction with the styling library.
+
+**Skills:** Debugging, user-specific issue isolation, understanding browser extension behavior
+
+---
+
+## False DDoS Alert - Frontend Performance Issue
+
+**Problem:** Company suspected a DDoS attack due to unusual traffic patterns. Another developer had been investigating for days without finding the cause.
+
+**Investigation:** Took over the investigation a few days after the initial developer.
+
+**Root Cause:** Discovered a missing debounce on a frontend slider component, causing excessive API requests.
+
+**Resolution:** Implemented proper debouncing on the slider.
+
+**Skills:** Performance debugging, frontend optimization, API traffic analysis, persistence in problem-solving
+
+---
+
+## AWS Account Compromise - Leaked Access Keys
+
+**Problem:** Old AWS IAM user access keys were leaked and exploited by a bot to send mass SES (Simple Email Service) messages. This resulted in account-level restrictions on Lambda usage.
+
+**Investigation:**
+- Used AWS CloudTrail to trace unauthorized activity
+- Identified the compromised user and attack vector
+
+**Resolution:**
+- Immediately deactivated the compromised IAM user
+- Cleaned up other unused IAM users and reviewed account security
+- Activated MFA (Multi-Factor Authentication) across the account
+- Stayed up late coordinating with AWS Support to lift account restrictions
+- Successfully restored full account access
+
+**Impact:** Prevented further unauthorized usage, restored critical Lambda functionality, learned AWS security best practices.
+
+**Skills:** AWS security, CloudTrail log analysis, IAM management, incident response, vendor communication, working under pressure
+
+---
+
+## V1 to V2 Migration - Production Data Incident
+
+**Problem:** During a major system migration from V1 to V2, accidentally deleted more production data than intended while cleaning the database. The migration involved continuous data migration and cleaning scripts over 2 weeks.
+
+**Context:**
+- Migration required ongoing data scripts to move and clean data in the new database
+- High pressure to complete tasks quickly
+- Direct manipulation of production database became the norm
+
+**Investigation:** Immediately recognized the scope of the deletion and assessed what data was affected.
+
+**Resolution:**
+- Adapted and repurposed existing migration scripts to recover the deleted data
+- Restored all affected data within 2 hours
+- Successfully recovered from the incident
+
+**Lessons Learned:**
+- **Never treat production databases casually** - even under time pressure
+- Importance of proper migration planning and staging environments
+- Always have rollback plans and backups before production changes
+- Test deletion scripts thoroughly in non-production environments first
+- Time pressure should never compromise safety protocols
+- Keep detailed logs of all database operations
+
+**Impact:** Learned critical lessons about database safety, disaster recovery, and the importance of proper planning over speed. Developed better practices for handling production data.
+
+**Skills:** Database management, data recovery, script adaptation, working under pressure, incident recovery, learning from mistakes, PostgreSQL/MySQL operations
+
+---
+
+## Template for Future Entries
+
+**Problem:** [Brief description of what went wrong]
+
+**Investigation:** [How you approached the problem]
+
+**Root Cause:** [What you discovered]
+
+**Resolution:** [How you fixed it]
+
+**Impact:** [What was the result/learning]
+
+**Skills:** [Key technical and soft skills demonstrated]
+
+---

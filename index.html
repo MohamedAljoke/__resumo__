@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Aljoke - Learning Resources & Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(15, 15, 30, 0.8);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #2d4059;
+        }
+
+        h1 {
+            color: #64ffda;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.2rem;
+        }
+
+        .cv-download {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .cv-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        section {
+            margin: 40px 0;
+        }
+
+        h2 {
+            color: #64ffda;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        h3 {
+            color: #8892b0;
+            font-size: 1.3rem;
+            margin: 20px 0 10px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: rgba(45, 64, 89, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #2d4059;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(45, 64, 89, 0.5);
+            border-color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #64ffda;
+        }
+
+        .card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .card a:hover {
+            color: #64ffda;
+            text-decoration: underline;
+        }
+
+        .experience-item {
+            background: rgba(45, 64, 89, 0.2);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .experience-item h3 {
+            color: #64ffda;
+            margin-bottom: 10px;
+        }
+
+        .experience-item p {
+            color: #c9d1d9;
+            margin: 8px 0;
+        }
+
+        .skills {
+            color: #8892b0;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin: 15px 0;
+            color: #c9d1d9;
+        }
+
+        li {
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #2d4059;
+            color: #8892b0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mohamed Aljoke</h1>
+            <p class="subtitle">Fullstack Developer | Problem Solver | Continuous Learner</p>
+            <a href="mohamed_aljoke_fullstack.pdf" class="cv-download" download>📄 Download My Resume</a>
+        </header>
+
+        <section>
+            <h2>About This Repository</h2>
+            <p>This repository contains my personal learning materials, notes, and code snippets organized by technology and topic. It represents my journey as a developer and the knowledge I've accumulated through real-world experience.</p>
+        </section>
+
+        <section>
+            <h2>Learning Resources</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>📚 Snippets</h3>
+                    <ul>
+                        <li><a href="./snippets/golang/README.md">Go Snippets</a></li>
+                        <li><a href="./snippets/nodejs/README.md">Node.js Snippets</a></li>
+                        <li><a href="./snippets/reactjs/README.md">React.js Snippets</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🧠 Theory</h3>
+                    <ul>
+                        <li><a href="./theory/system-design.md">System Design</a></li>
+                        <li><a href="./theory/javascript-typescript.md">JavaScript / TypeScript</a></li>
+                        <li><a href="./theory/oop-solid-ddd-clean-code.md">OOP/SOLID/DDD/Clean Code</a></li>
+                        <li><a href="./theory/sql.md">SQL</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>💼 Work Experience</h3>
+                    <p><a href="./work-experiences.md">Real-world problem solving and incidents from work</a></p>
+                    <p style="margin-top: 10px; color: #8892b0; font-size: 0.9rem;">See below for highlights</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+
+            <div class="experience-item">
+                <h3>IDIP Tecnologia – Full Stack Developer</h3>
+                <p><strong>Oct 2022 – Present | Brasília, Brazil (Remote)</strong></p>
+                <p>Led multiple end-to-end projects using Node.js, React, Next.js, and AWS services:</p>
+                <ul>
+                    <li><strong>Credit-granting platform migration:</strong> Migrated monolithic system to microservices on AWS ECS and Lambda. Structured services in monorepo using Nx with CI/CD pipelines powered by Terraform. Integrated with Parcelex, CAF Antifraud, and Vindi using BFFs and API-to-API secured by Cognito and Secrets Manager. Developed notification client with webhook system for asynchronous communication.</li>
+                    <li><strong>B2B WhatsApp document platform:</strong> Built using AWS Lambda, S3, SQS with React dashboard and Serverless Framework.</li>
+                    <li><strong>Healthcare platform migration:</strong> Contributed to migration from Ruby on Rails to React + Java, enhancing scalability and maintainability.</li>
+                    <li><strong>On-premise PWA modernization:</strong> Modernized using React and Node.js, created Java APIs integrated with factory conveyor systems using Redis for caching.</li>
+                    <li><strong>Mentorship:</strong> Guided junior developers in architecture discussions, code reviews, and development workflow improvements.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Skule Tecnologia – Mentor</h3>
+                <p><strong>Feb 2023 – Aug 2023 | Remote</strong></p>
+                <p>Mentored six programming interns in Node.js and Next.js projects. Helped resolve merge conflicts, reviewed pull requests, and led technical sessions in English on clean architecture and best practices.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Advanced Digital – Frontend Developer Intern</h3>
+                <p><strong>Feb 2022 – Oct 2022 | Brasília, Brazil</strong></p>
+                <p>Maintained and extended React.js e-commerce app with Node.js backend. Migrated ticket-selling UI from PHP to React.js, improving UX and maintainability. Launched two MVPs using Flutter (GetX), gaining mobile app delivery and API integration experience.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Notable Problem Solving & Incidents</h2>
+            <p style="color: #8892b0; margin-bottom: 20px;"><em>Deep technical challenges and weird bugs encountered in production. <a href="./work-experiences.md" style="color: #667eea;">See full details here</a></em></p>
+
+            <div class="experience-item">
+                <h3>AWS Account Compromise - Security Incident Response</h3>
+                <p><strong>Problem:</strong> Old AWS IAM access keys were leaked and exploited to send mass SES messages, resulting in account-level Lambda restrictions.</p>
+                <p><strong>Resolution:</strong> Used CloudTrail to trace unauthorized activity, deactivated compromised users, implemented MFA, and coordinated with AWS Support to restore full account access.</p>
+                <p class="skills">Skills: AWS security, CloudTrail analysis, IAM management, incident response, working under pressure</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>False DDoS Alert - Performance Debugging</h3>
+                <p><strong>Problem:</strong> Company suspected DDoS attack due to unusual traffic patterns. Previous developer investigated for days without success.</p>
+                <p><strong>Resolution:</strong> Discovered missing debounce on frontend slider causing excessive API requests. Implemented proper debouncing.</p>
+                <p class="skills">Skills: Performance debugging, frontend optimization, API traffic analysis, persistence in problem-solving</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>V1 to V2 Migration - Data Recovery</h3>
+                <p><strong>Problem:</strong> Accidentally deleted production data during major system migration while running cleaning scripts.</p>
+                <p><strong>Resolution:</strong> Adapted existing migration scripts to recover deleted data within 2 hours. All data successfully restored.</p>
+                <p class="skills">Skills: Database management, data recovery, script adaptation, incident recovery, PostgreSQL/MySQL operations</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Browser Extension Conflict Bug</h3>
+                <p><strong>Problem:</strong> Single user experiencing issues while all others worked fine.</p>
+                <p><strong>Resolution:</strong> After thorough investigation, discovered browser extension interfering with styling package. Identified specific extension and its interaction.</p>
+                <p class="skills">Skills: Debugging, user-specific issue isolation, understanding browser extension behavior</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>This is a personal learning repository. Feel free to use it as a reference.</p>
+            <p style="margin-top: 10px;">© 2024 Mohamed Aljoke | For personal use and learning purposes</p>
+        </footer>
+    </div>
+</body>
+</html>

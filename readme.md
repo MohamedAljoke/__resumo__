@@ -7,13 +7,14 @@ This repository contains my personal learning materials, notes, and code snippet
 - `snippets/` - Contains all markdown Snippets
   - [Go Snippets](./snippets/golang/README.md)
   - [Node.js Snippets](./snippets/nodejs/README.md)
-  - [React.js Snippets](./snippets/nodejs/README.md)
+  - [React.js Snippets](./snippets/reactjs/README.md)
 - `theory/` - Contains all markdown Snippets
   - [System Design](./theory/system-design.md)
   - [Javascript / Typescript](./theory/javascript-typescript.md)
   - [OOP/SOLID/DDD/Clean Code](./theory/oop-solid-ddd-clean-code.md)
   - [SQL](./theory/sql.md)
 - `images/` - Contains images and diagrams used in documentation
+- [Work Experiences](./work-experiences.md) - Real-world problem solving and incidents from work
 
 
 
