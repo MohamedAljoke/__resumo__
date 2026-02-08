@@ -9,8 +9,10 @@
 - [Closures](#closures)
 - [Generators](#generators)
 - [Abstract Class vs Interface](#abstract-class-vs-interface)
+- [Static vs Abstract vs Private vs Protected](#protected-private-static)
 
 ## External links
+
 - [Closures - Lydia Hallie](https://youtu.be/6Ixyltr8_R0?si=YyHWy_TFFGWXqkpn)
 - [Event loop - Boot dev](https://youtu.be/WNrHrwm1wkU?si=ozwVbhNY3UXRrWLo)
 
@@ -23,6 +25,7 @@
   "sourceMap": true /* Generates source map files (.map) that allow debugging of TypeScript code in browsers by mapping compiled JavaScript back to original TypeScript source. This helps with debugging by showing original TypeScript lines in dev tools */
 }
 ```
+
 ## Ecmascript vs javascript
 
 - ECMAScript (ES) is the standardized specification for scripting languages, maintained by ECMA International (TC39 committee).
@@ -120,7 +123,7 @@ function outerFunction(outerVariable) {
   const insideVar = "insideVar";
   return function innerFunction(innerVariable) {
     console.log(
-      `Outer: ${outerVariable}, Inner: ${innerVariable}, insideVar: ${insideVar}`
+      `Outer: ${outerVariable}, Inner: ${innerVariable}, insideVar: ${insideVar}`,
     );
   };
 }
@@ -129,9 +132,10 @@ const newFunction = outerFunction("Hello");
 const insideVar = "changed"; //even tho we "change the insideVar" it does not change in the function cuz it uses the var on the instance it was created
 newFunction("World"); // Output: Outer: Hello, Inner: World, insideVar: insideVar
 ```
+
 ## generators
 
-JavaScript generators are special functions that allow you to pause and resume execution. They are defined using the function* syntax and use the yield keyword to return values incrementally.
+JavaScript generators are special functions that allow you to pause and resume execution. They are defined using the function\* syntax and use the yield keyword to return values incrementally.
 
 ### examples:
 
@@ -139,7 +143,7 @@ JavaScript generators are special functions that allow you to pause and resume e
 function* fetchData() {
   console.log("Fetching...");
   yield new Promise((resolve) =>
-    setTimeout(() => resolve("Data Loaded"), 2000)
+    setTimeout(() => resolve("Data Loaded"), 2000),
   );
 }
 
@@ -176,7 +180,6 @@ app.listen(3000, () => console.log("Server running on port 3000"));
 ## Abstract Class vs Interface
 
 - **Abstract Classes**:
-
   - Can have both implemented and abstract (unimplemented) methods.
   - Can have properties with logic.
   - Supports access modifiers (`public`, `protected`, `private`).
@@ -222,4 +225,85 @@ class Bird extends Animal implements Flyable {
 }
 ```
 
+## Protected Private Static
 
+### `static`
+
+- Belongs to the **class itself**, not to instances.
+- Accessed using the class name.
+- Often used for utility methods or shared values.
+
+```ts
+class MathUtils {
+  static PI = 3.14;
+
+  static add(a: number, b: number) {
+    return a + b;
+  }
+}
+
+console.log(MathUtils.PI);
+console.log(MathUtils.add(2, 3));
+```
+
+### `abstract`
+
+- Only allowed inside **abstract classes**.
+- Defines methods that **must be implemented** by subclasses.
+- You cannot instantiate an abstract class.
+
+```ts
+abstract class Payment {
+  abstract process(amount: number): void;
+}
+
+class CreditCard extends Payment {
+  process(amount: number): void {
+    console.log(`Processing $${amount}`);
+  }
+}
+
+// ❌ const p = new Payment();
+```
+
+### `private`
+
+- Accessible **only inside the class**.
+- Not accessible from outside or subclasses.
+- Enforced only at compile time (TypeScript).
+
+```ts
+class User {
+  private password: string;
+
+  constructor(password: string) {
+    this.password = password;
+  }
+
+  checkPassword(input: string) {
+    return input === this.password;
+  }
+}
+```
+
+### `protected`
+
+- Accessible inside the class **and subclasses**.
+- Not accessible from outside.
+- Enforced only at compile time (TypeScript).
+
+```ts
+class Person {
+  protected age: number;
+
+  constructor(age: number) {
+    this.age = age;
+  }
+}
+
+class Employee extends Person {
+  getAge() {
+    return this.age;
+  }
+}
+```
