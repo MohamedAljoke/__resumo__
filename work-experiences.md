@@ -35,10 +35,12 @@ This document tracks significant issues, bugs, and problems encountered at work 
 **Problem:** Old AWS IAM user access keys were leaked and exploited by a bot to send mass SES (Simple Email Service) messages. This resulted in account-level restrictions on Lambda usage.
 
 **Investigation:**
+
 - Used AWS CloudTrail to trace unauthorized activity
 - Identified the compromised user and attack vector
 
 **Resolution:**
+
 - Immediately deactivated the compromised IAM user
 - Cleaned up other unused IAM users and reviewed account security
 - Activated MFA (Multi-Factor Authentication) across the account
@@ -56,6 +58,7 @@ This document tracks significant issues, bugs, and problems encountered at work 
 **Problem:** During a major system migration from V1 to V2, accidentally deleted more production data than intended while cleaning the database. The migration involved continuous data migration and cleaning scripts over 2 weeks.
 
 **Context:**
+
 - Migration required ongoing data scripts to move and clean data in the new database
 - High pressure to complete tasks quickly
 - Direct manipulation of production database became the norm
@@ -63,11 +66,13 @@ This document tracks significant issues, bugs, and problems encountered at work 
 **Investigation:** Immediately recognized the scope of the deletion and assessed what data was affected.
 
 **Resolution:**
+
 - Adapted and repurposed existing migration scripts to recover the deleted data
 - Restored all affected data within 2 hours
 - Successfully recovered from the incident
 
 **Lessons Learned:**
+
 - **Never treat production databases casually** - even under time pressure
 - Importance of proper migration planning and staging environments
 - Always have rollback plans and backups before production changes
@@ -78,6 +83,31 @@ This document tracks significant issues, bugs, and problems encountered at work 
 **Impact:** Learned critical lessons about database safety, disaster recovery, and the importance of proper planning over speed. Developed better practices for handling production data.
 
 **Skills:** Database management, data recovery, script adaptation, working under pressure, incident recovery, learning from mistakes, PostgreSQL/MySQL operations
+
+## Full Entity Update Race Condition
+
+**Problem:**  
+Intermittent data inconsistencies occurred when the same entity was updated multiple times in quick succession, causing fields to be unexpectedly overwritten with stale data.
+
+**Investigation:**
+
+- Analyzed application logs and database timestamps to identify overlapping update operations
+- Reproduced the issue by triggering concurrent update requests from different flows
+- Inspected request payloads and noticed full entity data being sent with outdated values
+
+**Root Cause:**  
+Race condition caused by **full entity updates** where concurrent requests were based on stale reads and the last write overwrote newer data.
+
+**Resolution:**
+
+- Refactored update logic to use partial updates instead of full entity replacements
+- COULD HAVE Added optimistic locking/version checks to prevent stale writes
+
+**Impact:**  
+Eliminated silent data loss, improved data consistency under concurrency, and increased system reliability in high-traffic scenarios.
+
+**Skills:**  
+Concurrency debugging, race condition handling, API design, data consistency, backend architecture, defensive programming
 
 ---
 
