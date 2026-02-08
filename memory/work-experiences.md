@@ -109,6 +109,34 @@ Eliminated silent data loss, improved data consistency under concurrency, and in
 **Skills:**  
 Concurrency debugging, race condition handling, API design, data consistency, backend architecture, defensive programming
 
+## Node.js Temporary File Memory Leak (Unflushed Writes)
+
+**Problem:**  
+An EC2 instance began running out of memory and becoming unstable over time. The issue escalated under load, eventually requiring instance restarts.
+
+**Investigation:**
+
+- Monitored EC2 memory usage and noticed a steady, non-recovering increase
+- Analyzed Node.js process memory and system-level disk usage
+- Reviewed recent changes involving file generation and temporary file handling
+- Identified heavy use of in-memory buffers and temporary files written during request processing
+
+**Root Cause:**  
+Node.js was **writing files in memory but not properly flushing or closing streams**, causing temporary files to accumulate. This led to memory pressure and unbounded growth over time, especially under concurrent workloads.
+
+**Resolution:**
+
+- Refactored file handling to use proper stream-based writes instead of large in-memory buffers
+- Ensured all write streams were explicitly closed and flushed
+- Implemented cleanup logic for temporary files after use
+- Added monitoring and alerts for memory usage and disk growth on the EC2 instance
+
+**Impact:**  
+Stopped the memory leak, stabilized the EC2 instance, and significantly improved system reliability under load. Gained deeper understanding of Node.js memory management, stream lifecycle, and the importance of resource cleanup in long-running services.
+
+**Skills:**  
+Node.js internals, memory leak debugging, stream handling, temporary file management, EC2 monitoring, performance optimization, production incident diagnosis
+
 ---
 
 ## Template for Future Entries
