@@ -307,3 +307,298 @@ class Employee extends Person {
   }
 }
 ```
+
+## Pillars of Object-Oriented Programming (OOP)
+
+Object-Oriented Programming is based on four main principles:
+
+- Encapsulation
+- Abstraction
+- Inheritance
+- Polymorphism
+
+---
+
+### 1️⃣ Encapsulation
+
+Encapsulation means bundling data and behavior together and restricting
+direct access to internal state.
+
+In TypeScript, we use access modifiers like `private`, `protected`, and
+`public`.
+
+```typescript
+class BankAccount {
+  private balance: number;
+
+  constructor(initialBalance: number) {
+    this.balance = initialBalance;
+  }
+
+  deposit(amount: number) {
+    if (amount <= 0) throw new Error("Invalid amount");
+    this.balance += amount;
+  }
+
+  getBalance() {
+    return this.balance;
+  }
+}
+
+const account = new BankAccount(100);
+account.deposit(50);
+// account.balance ❌ Error (private)
+```
+
+Why this matters: - Protects internal state - Prevents invalid
+mutations - Keeps invariants safe
+
+---
+
+### 2️⃣ Abstraction
+
+Abstraction means hiding implementation details and exposing only what
+is necessary.
+
+In TypeScript, we often use interfaces or abstract classes.
+
+```typescript
+interface PaymentGateway {
+  charge(amount: number): Promise<void>;
+}
+
+class StripeGateway implements PaymentGateway {
+  async charge(amount: number) {
+    console.log("Charging with Stripe:", amount);
+  }
+}
+
+class MercadoPagoGateway implements PaymentGateway {
+  async charge(amount: number) {
+    console.log("Charging with MercadoPago:", amount);
+  }
+}
+```
+
+Business logic depends on the abstraction:
+
+```typescript
+class ProcessPayment {
+  constructor(private gateway: PaymentGateway) {}
+
+  async execute(amount: number) {
+    await this.gateway.charge(amount);
+  }
+}
+```
+
+We don't care _how_ it charges --- only that it can.
+
+---
+
+### 3️⃣ Inheritance
+
+Inheritance allows a class to reuse properties and behavior from another
+class.
+
+```typescript
+class User {
+  constructor(public name: string) {}
+
+  greet() {
+    return `Hello, I'm ${this.name}`;
+  }
+}
+
+class Admin extends User {
+  deleteUser() {
+    return "User deleted";
+  }
+}
+
+const admin = new Admin("Alice");
+admin.greet(); // inherited
+admin.deleteUser(); // own method
+```
+
+⚠️ Best practice: Prefer composition over inheritance in many real-world
+systems.
+
+---
+
+### 4️⃣ Polymorphism
+
+Polymorphism means different objects can respond to the same method in
+different ways.
+
+```typescript
+const gateway: PaymentGateway = new StripeGateway();
+await gateway.charge(100);
+
+const anotherGateway: PaymentGateway = new MercadoPagoGateway();
+await anotherGateway.charge(100);
+```
+
+Same method → different behavior.
+
+---
+
+### Quick Mental Model
+
+Pillar What It Solves
+
+---
+
+Encapsulation Protect state
+Abstraction Hide complexity
+Inheritance Reuse behavior
+Polymorphism Make behavior interchangeable
+
+## Composition vs Inheritance
+
+Both Composition and Inheritance are ways to reuse behavior in
+Object-Oriented Programming, but they solve different problems and have
+different trade-offs.
+
+---
+
+### 🔹 Inheritance
+
+Inheritance represents an **"is-a"** relationship.
+
+A subclass extends a base class and inherits its properties and methods.
+
+```typescript
+class Animal {
+  constructor(public name: string) {}
+
+  move() {
+    console.log(`${this.name} is moving`);
+  }
+}
+
+class Dog extends Animal {
+  bark() {
+    console.log("Woof!");
+  }
+}
+
+const dog = new Dog("Rex");
+dog.move(); // inherited
+dog.bark(); // own method
+```
+
+Here:
+
+- `Dog` **is an** `Animal`
+- It reuses the base class behavior
+
+#### ✅ When Inheritance Makes Sense
+
+- There is a true "is-a" relationship
+- The base behavior is stable
+- You want shared core logic
+- You are modeling a clear hierarchy
+
+---
+
+### ⚠️ The Problem With Inheritance
+
+Inheritance can become rigid and hard to extend.
+
+If you need combinations like:
+
+- FlyingCharacter
+- SwimmingCharacter
+- FlyingSwimmingCharacter
+- FireFlyingSwimmingCharacter
+
+You may end up with deep and complex class trees.
+
+This is called **inheritance explosion**.
+
+---
+
+### 🔹 Composition
+
+Composition represents a **"has-a"** relationship.
+
+Instead of extending behavior, a class contains other objects that
+provide behavior.
+
+```typescript
+interface AttackStrategy {
+  attack(): void;
+}
+
+class BasicAttack implements AttackStrategy {
+  attack() {
+    console.log("Basic attack");
+  }
+}
+
+class MagicAttack implements AttackStrategy {
+  attack() {
+    console.log("Magic attack");
+  }
+}
+
+class Character {
+  constructor(private attackStrategy: AttackStrategy) {}
+
+  attack() {
+    this.attackStrategy.attack();
+  }
+}
+
+const mage = new Character(new MagicAttack());
+mage.attack(); // Magic attack
+
+const warrior = new Character(new BasicAttack());
+warrior.attack(); // Basic attack
+```
+
+Here:
+
+- `Character` **has an** `AttackStrategy`
+- Behavior can change dynamically
+- No deep class hierarchy
+
+---
+
+### ✅ Why Composition Is Often Preferred
+
+- More flexible
+- Easier to test
+- Looser coupling
+- Behavior can change at runtime
+- Works well with Dependency Injection
+- Follows SOLID principles better
+
+---
+
+### 🔥 Side-by-Side Comparison
+
+Inheritance Composition
+
+---
+
+"is-a" relationship "has-a" relationship
+Tight coupling Loose coupling
+Static hierarchy Dynamic behavior
+Harder to extend safely Easier to extend
+Can cause deep class trees Flatter design
+
+---
+
+### 🧠 Rule of Thumb
+
+If you can say:
+
+- "A Dog **is an** Animal" → Inheritance is reasonable\
+- "A Character **has a** strategy" → Use Composition
+
+Modern backend systems (Clean Architecture, DDD, scalable systems)
+strongly favor:
+
+> **Composition over Inheritance**

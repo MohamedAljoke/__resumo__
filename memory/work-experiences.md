@@ -139,6 +139,91 @@ Node.js internals, memory leak debugging, stream handling, temporary file manage
 
 ---
 
+## A1 Certificate PDF Signing and Validation Flow
+
+**Problem:**  
+Needed to support secure PDF signing with A1 digital certificates while meeting Brazilian ITI/ICP-Brasil validation requirements and protecting sensitive certificate material.
+
+**Investigation:**
+
+- Studied the A1 certificate signing flow using `.pfx` files
+- Reviewed how to validate certificate chains and document authenticity through AIA-based verification
+- Evaluated secure storage requirements for private certificate files at rest
+- Verified how RSA encryption and certificate handling fit into the PDF signing process
+- Assessed memory risk from concurrent PDF generation and considered scaling alternatives such as asynchronous processing or offloading generation to Lambda
+
+**Resolution:**
+
+- Implemented encryption at rest for `.pfx` certificate files
+- Added document and certificate validation using AIA verification
+- Used RSA-based cryptography in the signing flow
+- Built PDF signing using A1 certificates in a valid Brazilian ITI/ICP-Brasil-compliant pattern
+- Added semaphore-based concurrency control around PDF generation, allowing 4 active jobs and 16 queued jobs before returning `503 Service Unavailable`
+- Chose the semaphore approach as a simple, effective safeguard for the existing traffic level while keeping future options open for asynchronous processing or dedicated Lambda-based generation
+
+**Impact:**  
+Enabled secure, standards-compliant PDF signing while improving protection of sensitive certificate assets, strengthening validation of signed documents, and preventing PDF-generation spikes from exhausting instance memory.
+
+**Skills:**  
+Digital signatures, A1 certificates, PDF signing, RSA cryptography, certificate-chain validation, AIA verification, encryption at rest, `.pfx` handling, ICP-Brasil compliance, concurrency control, backpressure design, memory protection, capacity planning
+
+---
+
+## Go Internal Proxy Panic from Reused `fasthttp` Headers
+
+**Problem:**  
+An internal proxy server written in Go began panicking under high concurrency while forwarding requests through `fasthttp`.
+
+**Investigation:**
+
+- Investigated failures that only appeared under heavier concurrent traffic
+- Traced the issue to request-header handling inside the proxy path
+- Identified that `fasthttp` optimizes allocations by reusing internal buffers rather than duplicating header data automatically
+- Built a focused test case to reliably reproduce the panic and confirm the failure mode
+
+**Root Cause:**  
+The proxy flow retained or reused header values without making an explicit copy. Under concurrency, the underlying `fasthttp` buffers could be reused and mutated, creating unsafe shared-memory behavior and causing panics.
+
+**Resolution:**
+
+- Fixed the header handling by reallocating/copying the data into independent memory when it needed to outlive the current request context
+- Adjusted the implementation to respect `fasthttp`'s zero-allocation design and buffer-lifetime expectations
+
+**Impact:**  
+Eliminated concurrency-related panics in the proxy path, added regression coverage for the failure mode, and improved understanding of memory ownership, request lifetimes, and zero-copy tradeoffs in high-performance Go HTTP libraries.
+
+**Skills:**  
+Go, `fasthttp`, concurrency debugging, memory ownership, zero-copy APIs, proxy servers, high-throughput systems, panic diagnosis, regression testing
+
+---
+
+## Bulk Compliance Reprocessing with Observability and Backpressure Monitoring
+
+**Problem:**  
+Some accounts had not gone through required compliance checks, creating a need to reprocess them reliably at scale without overwhelming the existing system.
+
+**Investigation:**
+
+- Reviewed the existing compliance flow to reuse proven application behavior instead of creating a separate one-off process
+- Identified how to trigger many compliance checks in bulk while preserving normal service contracts
+- Monitored Grafana dashboards during execution to track queue backpressure, microservice memory usage, and overall system stability
+- Used the higher-load execution path to expose a latent `fasthttp` header-memory issue in an internal proxy service
+
+**Resolution:**
+
+- Built a script to re-run compliance checks for the affected accounts using the already-existing business flow
+- Designed the script so many accounts could be processed in one run while still observing system limits
+- Actively monitored queue depth and microservice memory consumption in Grafana during execution
+- Investigated and fixed the `fasthttp` concurrency bug uncovered during the bulk processing work
+
+**Impact:**  
+Completed compliance reprocessing for affected accounts without creating a parallel workflow, while validating the system under load and uncovering a production-risk concurrency issue before it caused broader failures.
+
+**Skills:**  
+Operational automation, bulk processing, compliance workflows, observability, Grafana, queue backpressure, microservice monitoring, load-aware execution, incident discovery, system reliability
+
+---
+
 ## Template for Future Entries
 
 **Problem:** [Brief description of what went wrong]
