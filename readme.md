@@ -4,15 +4,16 @@ My notes for reviewing before an interview: questions with the answer to say out
 
 ## Structure
 
-One folder per stack, plus `general/` for topics that don't depend on a language.
+`languages/` has one folder per programming language. `general/` holds topics that don't depend on a language.
 
-- **[go/](./go/README.md)**
-  - [Fundamentals](./go/fundamentals.md): copies, slices, maps, range, strings, receivers, interfaces & nil, errors
-  - [Concurrency & Channels](./go/concurrency.md): scheduler, races, memory model, channels, select, context, sync, patterns
-- **[javascript/](./javascript/README.md)**
-  - [JavaScript / TypeScript](./javascript/javascript-typescript.md)
-  - [Node.js](./javascript/nodejs.md)
-  - [React](./javascript/react.md)
+- **[languages/](./languages/README.md)**
+  - **[go/](./languages/go/README.md)**
+    - [Fundamentals](./languages/go/fundamentals.md): copies, slices, maps, range, strings, receivers, interfaces & nil, errors
+    - [Concurrency & Channels](./languages/go/concurrency.md): scheduler, races, memory model, channels, select, context, sync, patterns
+  - **[javascript/](./languages/javascript/README.md)**
+    - [JavaScript / TypeScript](./languages/javascript/javascript-typescript.md)
+    - [Node.js](./languages/javascript/nodejs.md)
+    - [React](./languages/javascript/react.md)
 - **[general/](./general/README.md)**
   - [System Design](./general/system-design.md)
   - [OOP / SOLID / DDD / Clean Code](./general/oop-solid-ddd-clean-code.md)
@@ -22,7 +23,7 @@ One folder per stack, plus `general/` for topics that don't depend on a language
 
 ## Adding notes
 
-- A new language or stack gets its own folder, with a `README.md` index.
+- A new language gets a folder under `languages/`, with a `README.md` index. Topics that don't depend on a language go in `general/`.
 - Each file: syllabus at the top, `**Q: ...**` followed by a short answer, and a 30-second summary at the end.
 
 ## License
