@@ -14,7 +14,7 @@ Based on *100 Go Mistakes and How to Avoid Them* (Teiva Harsanyi). Outputs verif
 - [Methods and Receivers](#methods-and-receivers)
 - [Interfaces and nil](#interfaces-and-nil)
 - [Error Handling](#error-handling)
-- 🚧 Concurrency (coming next)
+- [Concurrency and Channels →](./golang-concurrency.md) (separate page)
 
 ---
 

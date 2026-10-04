@@ -14,6 +14,7 @@ This repository contains my personal learning materials, notes, and code snippet
   - [OOP/SOLID/DDD/Clean Code](./theory/oop-solid-ddd-clean-code.md)
   - [SQL](./theory/sql.md)
   - [Go](./theory/golang.md)
+  - [Go Concurrency](./theory/golang-concurrency.md)
 - `images/` - Contains images and diagrams used in documentation
 - [Work Experiences](./work-experiences.md) - Real-world problem solving and incidents from work
 
