@@ -77,7 +77,7 @@ In a coordinated system, components work together without a central authority di
 
 - Escalability how much the service can handle simultaneos users.
 - Elasticity how much it can handle an explosion of users
-  ![alt text](images/scalability_elasticity.png)
+  ![alt text](../images/scalability_elasticity.png)
 
 ## Static coupling vs Dynamic coupling
 

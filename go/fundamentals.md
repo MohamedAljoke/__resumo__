@@ -1,10 +1,11 @@
-# Go
+# Go: Fundamentals
 
 Interview review: each question has the answer to say out loud. **Bold = the keywords to hit.**
 Based on *100 Go Mistakes and How to Avoid Them* (Teiva Harsanyi). Outputs verified on Go 1.25.
 
 ## 🔗 Syllabus
 
+- [Language Basics](#language-basics)
 - [Core Concept: Everything Is a Copy](#core-concept-everything-is-a-copy)
 - [Slices and Arrays](#slices-and-arrays)
 - [Maps](#maps)
@@ -14,7 +15,28 @@ Based on *100 Go Mistakes and How to Avoid Them* (Teiva Harsanyi). Outputs verif
 - [Methods and Receivers](#methods-and-receivers)
 - [Interfaces and nil](#interfaces-and-nil)
 - [Error Handling](#error-handling)
-- [Concurrency and Channels →](./golang-concurrency.md) (separate page)
+- [Concurrency and Channels →](./concurrency.md) (separate page)
+
+---
+
+## Language Basics
+
+**Q: Do you need `break` in a Go `switch`?**
+**No. Each case breaks automatically.** Use **`fallthrough`** to run the **next case's body without checking its condition**. `default` runs only when **no case matches**, wherever it's written.
+```go
+for _, v := range []int{1, 2, 9} {
+	switch v {
+	default: fmt.Println(v, "default")   // written first, still only the fallback
+	case 1:  fmt.Println(v, "one")
+	case 2:  fmt.Println(v, "two"); fallthrough
+	case 3:  fmt.Println(v, "three")
+	}
+}
+// 1 one / 2 two / 2 three / 9 default
+```
+
+**Q: Package A imports B and B imports A. What happens?**
+**A compile error: `import cycle not allowed`.** Go catches it at **compile time**. Fix it by moving the shared code into a third package, or by inverting the dependency with an **interface** defined on the consumer's side.
 
 ---
 
@@ -106,7 +128,13 @@ Give `dst` a length first: `make([]int, len(src))`, or just use `slices.Clone(sr
 
 **Q: nil slice vs empty slice?**
 nil: `var s []T`, with **no backing array**. Empty: `[]T{}` or `make([]T, 0)`. Both have **len 0** and work the same with `len`, `range`, and `append`.
-They differ in: **JSON** (nil → `null`, empty → `[]`) and **`reflect.DeepEqual`** / testify (not equal).
+They differ in: **JSON** and **`reflect.DeepEqual`** / testify (not equal).
+```go
+type Data struct{ Items []string `json:"items"` }
+json.Marshal(Data{})                        // {"items":null}
+json.Marshal(Data{Items: []string{}})       // {"items":[]}
+// Unmarshal: null → nil slice, [] → empty non-nil slice (len 0)
+```
 *Best practice:* check **`len(s) == 0`**, never `s == nil`. Return `nil` by default.
 
 **Q: Can you compare slices with `==`?**

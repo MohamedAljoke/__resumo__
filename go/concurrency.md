@@ -2,7 +2,7 @@
 
 Interview review: each question has the answer to say out loud. **Bold = the keywords to hit.**
 Based on *100 Go Mistakes and How to Avoid Them* (Teiva Harsanyi), chapters 8–9. Outputs verified on Go 1.25.
-Part of the [Go review](./golang.md).
+Part of the [Go review](./README.md). See also [Fundamentals](./fundamentals.md).
 
 ## 🔗 Syllabus
 

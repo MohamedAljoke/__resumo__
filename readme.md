@@ -1,32 +1,30 @@
-# Learning Resources Repository
+# Interview Review
 
-This repository contains my personal learning materials, notes, and code snippets organized by technology and topic.
+My notes for reviewing before an interview: questions with the answer to say out loud, with **bold keywords** to hit. Code outputs are checked by running them.
 
-## Directory Structure
+## Structure
 
-- `snippets/` - Contains all markdown Snippets
-  - [Go Snippets](./snippets/golang/README.md)
-  - [Node.js Snippets](./snippets/nodejs/README.md)
-  - [React.js Snippets](./snippets/reactjs/README.md)
-- `theory/` - Contains all markdown Snippets
-  - [System Design](./theory/system-design.md)
-  - [Javascript / Typescript](./theory/javascript-typescript.md)
-  - [OOP/SOLID/DDD/Clean Code](./theory/oop-solid-ddd-clean-code.md)
-  - [SQL](./theory/sql.md)
-  - [Go](./theory/golang.md)
-  - [Go Concurrency](./theory/golang-concurrency.md)
-- `images/` - Contains images and diagrams used in documentation
-- [Work Experiences](./work-experiences.md) - Real-world problem solving and incidents from work
+One folder per stack, plus `general/` for topics that don't depend on a language.
 
+- **[go/](./go/README.md)**
+  - [Fundamentals](./go/fundamentals.md): copies, slices, maps, range, strings, receivers, interfaces & nil, errors
+  - [Concurrency & Channels](./go/concurrency.md): scheduler, races, memory model, channels, select, context, sync, patterns
+- **[javascript/](./javascript/README.md)**
+  - [JavaScript / TypeScript](./javascript/javascript-typescript.md)
+  - [Node.js](./javascript/nodejs.md)
+  - [React](./javascript/react.md)
+- **[general/](./general/README.md)**
+  - [System Design](./general/system-design.md)
+  - [OOP / SOLID / DDD / Clean Code](./general/oop-solid-ddd-clean-code.md)
+  - [SQL](./general/sql.md)
+- [Work Experiences](./memory/work-experiences.md): real problems and incidents from work, to use as behavioural answers
+- `images/`: diagrams used in the notes
 
+## Adding notes
 
-## Contributing
-
-This is a personal learning repository. Feel free to use it as a reference, but please note that the content may not be complete or fully accurate as it represents my personal learning journey.
+- A new language or stack gets its own folder, with a `README.md` index.
+- Each file: syllabus at the top, `**Q: ...**` followed by a short answer, and a 30-second summary at the end.
 
 ## License
 
-This repository is for personal use and learning purposes.
-
----
-
+Personal learning repository. Feel free to use it as a reference, but it may be incomplete or contain mistakes.
