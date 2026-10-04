@@ -39,15 +39,10 @@
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     GitHub
                 </a>
-                <a href="https://devmohami.hashnode.dev/" target="_blank"
-                   class="inline-flex items-center px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl font-medium">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    Blog
-                </a>
-                <a href="../cv/mohamed_en_v2.pdf" target="_blank"
+                <a href="https://mohamedaljoke.github.io/cv/" target="_blank"
                    class="inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl font-medium">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    Resume PDF
+                    Resume &amp; Portfolio
                 </a>
                 <a href="mailto:mohammed.maljoke@gmail.com"
                    class="inline-flex items-center px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl font-medium">
@@ -163,9 +158,11 @@
                     <h2 class="text-4xl font-bold text-white mb-4">Professional Experience</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-green-400 to-teal-400 mx-auto rounded-full"></div>
                 </div>
-
-                <div id="experience-container" class="space-y-8">
-                    <!-- Experiences will be rendered here by JavaScript -->
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 text-center">
+                    <p class="text-slate-600 text-lg mb-6">My full work history, projects and skills, with the resume as PDF in English and Portuguese.</p>
+                    <a href="https://mohamedaljoke.github.io/cv/" class="inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-all duration-200 shadow-md font-medium">
+                        View resume &amp; portfolio →
+                    </a>
                 </div>
             </section>
 
@@ -263,76 +260,5 @@
         </footer>
     </div>
 
-    <script>
-        // Load and render professional experiences from the cv directory
-        async function loadExperiences() {
-            try {
-                const response = await fetch('../cv/experiences.json');
-                const experiences = await response.json();
-                renderExperiences(experiences);
-            } catch (error) {
-                console.error('Error loading experiences:', error);
-                document.getElementById('experience-container').innerHTML = `
-                    <div class="text-center py-12 text-gray-400">
-                        <p>Unable to load experience data. Please check the console for details.</p>
-                    </div>
-                `;
-            }
-        }
-
-        function renderExperiences(experiences) {
-            const container = document.getElementById('experience-container');
-
-            container.innerHTML = experiences.map((exp) => `
-                <div class="group bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 hover:shadow-2xl transition-all duration-300 hover:bg-white/95">
-                    <!-- Header -->
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
-                        <div class="flex-1 mb-4 md:mb-0">
-                            <h3 class="text-2xl font-bold text-slate-800 mb-2 group-hover:text-emerald-600 transition-colors duration-200">${exp.position}</h3>
-                            <h4 class="text-xl font-semibold text-slate-600 mb-2">${exp.company}</h4>
-                            <p class="text-slate-500 text-sm">${exp.location}</p>
-                        </div>
-                        <div class="flex flex-col items-start md:items-end">
-                            <span class="text-slate-600 font-medium mb-2">${exp.period}</span>
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                                exp.type === 'Current' ? 'bg-green-100 text-green-800' :
-                                exp.type === 'Contract' ? 'bg-blue-100 text-blue-800' :
-                                'bg-gray-100 text-gray-800'
-                            }">${exp.type}</span>
-                        </div>
-                    </div>
-
-                    <!-- Description -->
-                    <p class="text-slate-600 mb-6 leading-relaxed">${exp.description}</p>
-
-                    <!-- Key Highlights -->
-                    <div class="mb-6">
-                        <h5 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Key Highlights</h5>
-                        <div class="space-y-2">
-                            ${exp.highlights.map(highlight => `
-                                <div class="flex items-start group-hover:translate-x-1 transition-transform duration-200">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <p class="text-slate-600 text-sm leading-relaxed">${highlight}</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Technologies -->
-                    <div>
-                        <h5 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Technologies Used</h5>
-                        <div class="flex flex-wrap gap-2">
-                            ${exp.technologies.map(tech =>
-                                `<span class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 text-emerald-700 text-xs px-3 py-1.5 rounded-lg font-medium hover:from-emerald-100 hover:to-teal-100 transition-all duration-200">${tech}</span>`
-                            ).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', loadExperiences);
-    </script>
 </body>
 </html>
