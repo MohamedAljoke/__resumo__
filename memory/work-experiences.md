@@ -224,6 +224,45 @@ Operational automation, bulk processing, compliance workflows, observability, Gr
 
 ---
 
+## Onboarding File Uploads: Presigned URLs vs Streaming Through the API
+
+**Use for:** "a constraint you couldn't change shaped the UX", "a trade-off you'd revisit", idempotency, Go streaming.
+
+**Context:** Transfeera onboarding (BaaS). Clients send documents/evidence with the onboarding application, and those files later feed **KYC and compliance** checks. Most files are **under 1 MiB**, with a **20 MiB cap**.
+
+**Preferred design: presigned URLs + two buckets**
+
+- The API authorizes the upload and issues a **short-lived, narrowly scoped presigned URL** for one object key in a **temporary upload bucket**
+- The client uploads **directly to S3** and keeps the file ID
+- When the application arrives with that ID, the backend validates it and **promotes (copies)** the file into the **permanent evidence bucket**
+- A **lifecycle rule expires** the temporary bucket after about 2 days, so abandoned flows don't leave orphaned data. Only files linked to a completed application become compliance evidence
+- Upside: file bytes never touch the API
+
+**Constraint (couldn't change):** the **integration contract**. Clients integrate with plain API calls. Presigned uploads turn "send the application with attachments" into a **multi-step protocol** the client has to orchestrate: request a URL, upload elsewhere, keep the ID, handle failure and expiry, then submit. Putting the URL behind our domain hides the host, **not the extra steps**.
+
+**Decision:** keep the client experience simple (**one multipart request**) and take the complexity on ourselves.
+
+**What I built (Go, Fiber/fasthttp):**
+
+- **Streaming:** parse the multipart body incrementally and pass an **`io.Reader`** to the S3 uploader. The full 20 MiB file never sits in memory (Fiber needs `StreamRequestBody`, otherwise it buffers the whole body, and its default `BodyLimit` is 4 MB → 413)
+- **Idempotency key:** clients retry uploads on timeouts without knowing whether the first attempt worked. Same key → **return the existing file operation** instead of uploading a second copy or failing
+- **SHA-256 while streaming:** wrap the reader (`io.TeeReader` → `sha256`) so the hash is computed **in the same pass**, with no second read and no full buffer. It's a stable fingerprint of the content
+
+**Second constraint it exposed:** the AWS SDK uploader **buffers parts in memory** when given an `io.Reader`: **PartSize × Concurrency**, with a **5 MiB minimum part**. Small files cost almost nothing, but a **burst of near-20 MiB uploads** adds up fast. Streaming removed "whole file in memory" but **didn't make uploads free**. Mitigation: monitor upload spikes, **cap concurrency**, and if needed **throttle the one client** causing the spike (slower for them instead of worse for everyone).
+
+**What I'd revisit:** an **embedded upload widget or client SDK** that runs the presigned flow (URL, direct S3 upload, retries, file ID) behind a simple interface. That keeps bytes off the API and moves the complexity into something **we own**. Trigger: file sizes or volume growing, instead of scaling the API to carry bytes.
+
+**Likely follow-ups:**
+
+- **Q: Same idempotency key, different file?** Store the key **with the hash**. On a mismatch, reject with **409/422** (Stripe-style). Same key and same hash → return the original result
+- **Q: Two retries in flight at once?** Claim the key first, **atomically** (insert-if-absent / unique constraint) with an `in_progress` state. The second request gets "in progress" or waits; it doesn't upload again
+- **Q: Why not just limit size with presigned?** A presigned **PUT** can't enforce a size range. A presigned **POST** policy can (`content-length-range`). Mention it if they push on presigned
+- **Q: Why copy to a second bucket instead of tagging?** Clear boundary: the permanent bucket only holds evidence tied to a completed application. It gets its own retention and access policy, and expiry on the temporary bucket is a simple lifecycle rule
+
+**Skills:** Go streaming (`io.Reader`, `TeeReader`), S3 multipart upload, presigned URLs, lifecycle rules, idempotency, API design and trade-offs, memory and backpressure, KYC/compliance
+
+---
+
 ## Template for Future Entries
 
 **Problem:** [Brief description of what went wrong]
